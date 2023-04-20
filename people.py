@@ -1,6 +1,5 @@
-from person import Person
+from clients import Person
 
-from datetime import datetime, date, time
 
 class PeopleReservations:
     def __init__(self):

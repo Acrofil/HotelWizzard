@@ -5,12 +5,11 @@
 # 4 remove person reservation
 # 5 see all reservations
 
-from people import PeopleReservations
-from person import Person
+
 import sqlite3
 from database import Data
 from datetime import datetime, date, time
-import random
+from hotel_manager import HotelManager
 
 
 class Program:
@@ -18,6 +17,8 @@ class Program:
         # Create our database and database tables
         self.data = Data()
         self.data.create_tables()
+        
+        self.hotel_m = HotelManager()
 
     def menu(self):
         
@@ -49,22 +50,12 @@ class Program:
                 break
     
     def add_reservation(self):
-        first_name = input("Please input first name of the reservation holder: ")
-        last_name = input("Enter last name: ")
-        phone = input("Phone number: ")
-        email = input("Email: ")
-        cin = input("Enter check in date D-M-Y: ")
-        cot = input("Enter check out date D-M-Y: ")
-
-        reservation_number = random.randint(1000, 9999)
-
-
-        check_in = datetime.strptime(cin, '%d-%m-%Y').date()
-        check_out = datetime.strptime(cot, '%d-%m-%Y').date()
         
+        self.client = self.hotel_m.create_client()
+        self.reservation = self.hotel_m.create_reservation()
 
-        self.reservation = Person(first_name, last_name, phone, email, reservation_number, check_in, check_out, date.today())
-        
+        self.hotel_m.add_reservation_holder(self.client, self.reservation)
+
         print("reservation added")
       
         
