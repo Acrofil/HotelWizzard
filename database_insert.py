@@ -22,16 +22,18 @@ class Data:
     
     def add_client_to_database(self, client):
         # Create querrys for client to be executed
-        client_q = "INSERT INTO clients (first_name, last_name, phone, email) VALUES (?, ?, ?, ?)"
+        client_q = "INSERT INTO clients (client_personal_id, first_name, last_name, phone, email) VALUES (?, ?, ?, ?, ?)"
 
         # Create client data tuples
-        client_data = (client._first_name, client._last_name, client._phone, client._email)
+        client_data = (client._personal_id, client._first_name, client._last_name, client._phone, client._email)
 
         # Insert into database
         self.cursor.execute(client_q, client_data)
 
         # Commit changes
         self.conn.commit()
+        
+        return True
          
     def add_reservation_to_database(self, reservation):
         # Create querrys for reservation

@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS clients (
     id_client INTEGER NOT NULL,
+    client_personal_id INTEGER NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     phone TEXT NOT NULL,
