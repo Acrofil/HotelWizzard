@@ -7,7 +7,7 @@
 
 
 import sqlite3
-from database import Data
+from database_insert import Data
 from datetime import datetime, date, time
 from hotel_manager import HotelManager
 
@@ -15,14 +15,14 @@ from hotel_manager import HotelManager
 class Program:
     def __init__(self) -> None:
         # Create our database and database tables
-        self.data = Data()
-        self.data.create_tables()
+        self._data = Data()
+        self._data.create_tables()
         
-        self.hotel_m = HotelManager()
+        self._hotel_m = HotelManager()
 
     def menu(self):
         
-        print("Welcome to reservation manager! Please select what task would you like to perform?"
+        print("Welcome to Hotel Wizzard! Please select what task would you like to perform?"
             "\n 1. Add new reservation"
             "\n 2. Search for reservation"
             "\n 3. Edit reservation"
@@ -51,14 +51,12 @@ class Program:
     
     def add_reservation(self):
         
-        self.client = self.hotel_m.create_client()
-        self.reservation = self.hotel_m.create_reservation()
+        self.client = self._hotel_m.create_client()
+        self.reservation = self._hotel_m.create_reservation()
 
-        self.hotel_m.add_reservation_holder(self.client, self.reservation)
+        self._hotel_m.add_reservation_holder(self.client, self.reservation)
 
         print("reservation added")
       
         
 
-program = Program()
-program.execute()

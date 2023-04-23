@@ -32,11 +32,7 @@ class Data:
 
         # Commit changes
         self.conn.commit()
-
-        # Close connections
-        
-    
-
+         
     def add_reservation_to_database(self, reservation):
         # Create querrys for reservation
         reservation_q = "INSERT INTO reservations (reservation_number, checkin_date, checkout_date, total_days, date_created) VALUES (?, ?, ?, ?, ?)"
@@ -49,7 +45,6 @@ class Data:
 
         # Commit changes
         self.conn.commit()
-
 
     def add_reservation_holder_to_database(self, client, reservation):
         # Create querry to insert client id and reservation id into database
@@ -74,8 +69,6 @@ class Data:
 
         # Close cursor and connection
         
-
-    
     def search_reservation(self):
         pass
     

@@ -1,4 +1,4 @@
-from database import Data
+from database_insert import Data
 
 class Client:
     def __init__(self, first_name, last_name, phone, email):
@@ -20,6 +20,3 @@ class Client:
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
-    def add_res(self):
-        self.data = Data()
-        self.data.add_reservation_to_database(self.first_name, self.last_name, self.phone, self.email)
