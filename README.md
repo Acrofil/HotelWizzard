@@ -1,4 +1,4 @@
-# HOTEL MANAGER CLI PROGRAM ------------ HOTEL WIZZARD ------------ USING SQLite3 As Database.
+# HOTEL MANAGER CLI PROGRAM ---- HOTEL WIZZARD ---- USING SQLite3 As Database.
 
 # Readme Structure - add links later
 
@@ -32,8 +32,8 @@ Download all files. Run run.py. Follow the menu options.
 # What is my plan for the stages that the program will be going:
 
 - [x] Create simple program using SQLite3 to store clients and reservations in separated tables and link them together.
-- [] Create Client seaparatly and add it to the Database
-- [] Handle errors and correct user input for clients
+- [x] Create Client seaparatly and add it to the Database
+- [x] Handle errors and correct user input for clients
 - [] Create Reservation separatly and add Reservation titular. 
 Check if the titular is in the client list and return client info including the id with which we add it to the reservation. If more than one client with same name return all with a promp which one to be added. If there is no such client in the database promp for client creation. 
 - [] Handle errors and correct user input for reservations
@@ -80,13 +80,17 @@ Check if the titular is in the client list and return client info including the 
 - [hotel_manager.py]
 - [clients.py]
 - [reservations.py]
-- [database.py]
+- [database_insert.py]
+- [database_fetch.py]
 - [data.db]
 - [tables.sql]
 
 # User Interface Structure
 
-- [1] Add New Reservation
+- [1] Create Client or Reservation
+- [1.1] Create Client
+- [1.2] Create Reservation
+- [1.0] Back to Main Menu
 - [2] Search for Reservation/s
 - [2.1] From Date to Date
 - [2.2] Search by Reservation Number
@@ -107,6 +111,11 @@ Will add visualisation later
 For now there are 3 tables
 clients, reservations and person_reservation that links each person to their reservation.
 
-# Update v.0 , 20.04.2023
+# Update v.0.1.0 - 23.04.2023
+- Client is created and added separately from reservation
+- Validation for correct client input fields
+- Sub menu for Client and Reservation
+
+# Update v.0 - 20.04.2023
 - The program succesfully runs and creates database (data.db) from tables.sql 
 - Adds clients and reservations to the database and links them together.
