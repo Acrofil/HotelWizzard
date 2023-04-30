@@ -34,9 +34,11 @@ Download all files. Run run.py. Follow the menu options.
 - [x] Create simple program using SQLite3 to store clients and reservations in separated tables and link them together.
 - [x] Create Client seaparatly and add it to the Database
 - [x] Handle errors and correct user input for clients
-- [] Create Reservation separatly and add Reservation titular. 
-Check if the titular is in the client list and return client info including the id with which we add it to the reservation. If more than one client with same name return all with a promp which one to be added. If there is no such client in the database promp for client creation. 
-- [] Handle errors and correct user input for reservations
+- [x] Create Reservation separatly and add Reservation titular. 
+- [x] Check if the titular is in the client list and return client info including the id with which we add it to the reservation.
+- [x] If more than one client with same name return all with a promp which one to be added.
+- [x] If there is no such client in the database promp for client creation. 
+- [x] Handle errors and correct user input for reservations
 - [] Search reservations from date to date
 - [] Search by Reservation titular
 - [] Search by Reservation number
@@ -80,6 +82,7 @@ Check if the titular is in the client list and return client info including the 
 - [hotel_manager.py]
 - [clients.py]
 - [reservations.py]
+- [connect_database.py]
 - [database_insert.py]
 - [database_fetch.py]
 - [data.db]
@@ -111,11 +114,19 @@ Will add visualisation later
 For now there are 3 tables
 clients, reservations and person_reservation that links each person to their reservation.
 
-# Update v.0.1.0 - 23.04.2023
+# Update v0.0.3 - 30.04.2023
+- Create reservatuib wuth reservation titular
+- If names match select with the id which one to be added
+- If only one reservation titular match with clients ask again for confirmation
+- If there is no match then create new client and then add reservation
+- Handle errors for incorrect inputs
+- Printing the results in tabular style
+
+# Update v0.0.2 - 23.04.2023
 - Client is created and added separately from reservation
 - Validation for correct client input fields
 - Sub menu for Client and Reservation
 
-# Update v.0 - 20.04.2023
+# Update v0.0.1 - 20.04.2023
 - The program succesfully runs and creates database (data.db) from tables.sql 
 - Adds clients and reservations to the database and links them together.
