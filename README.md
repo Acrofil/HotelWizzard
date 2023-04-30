@@ -40,7 +40,7 @@ Download all files. Run run.py. Follow the menu options.
 - [x] If more than one client with same name return all with a promp which one to be added.
 - [x] If there is no such client in the database promp for client creation. 
 - [x] Handle errors and correct user input for reservations
-- [] Search reservations from date to date
+- [x] Search reservations from date to date
 - [] Search by Reservation titular
 - [] Search by Reservation number
 - [] Search for Client by name
@@ -96,10 +96,11 @@ Download all files. Run run.py. Follow the menu options.
 - [1.2] Create Reservation
 - [1.0] Back to Main Menu
 - [2] Search for Reservation/s
-- [2.1] From Date to Date
+- [2.1] Search reservations from Check in to Check out
 - [2.2] Search by Reservation Number
 - [2.3] Search by Client First and Last name's
-- [3] Show all reservations
+- [2.4] Show all reservations
+- [2.0] Back to Main Menu
 - [4] Edit Reservation
 - [5] Edit Client
 - [6] Delete Client

@@ -1,5 +1,8 @@
  # Versions updates
  
+# Update v0.0.4 - 30.04.2023
+- Search all reservations in database between user input dates: Check in and Check out
+
 # Update v0.0.3 - 30.04.2023
 - Create reservatuib wuth reservation titular
 - If names match select with the id which one to be added
