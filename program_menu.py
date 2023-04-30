@@ -10,14 +10,15 @@ import sqlite3
 from database_insert import CreateData
 from datetime import datetime, date, time
 from hotel_manager import HotelManager
+from hotel_manager import ManagerSearchReservations
 
 
 class Program:
     def __init__(self) -> None:
         # Create our database and database tables
         
-        
         self._hotel_m = HotelManager()
+        self._hotel_m_search = ManagerSearchReservations()
 
     # Main menu 
     def menu(self):      
@@ -33,25 +34,40 @@ class Program:
     def sub_menus(self, choice):
         while True:
            if choice == '1':
-            print("\n Please choose from available options: "
-                "\n 1. Create new Client"
-                "\n 2. Create new Reservation"
-                "\n 0. Return to main menu")
+                print("\n Please choose from available options: "
+                    "\n 1. Create new Client"
+                    "\n 2. Create new Reservation"
+                    "\n 0. Return to main menu")
             
-            self.execute_sub_menus()
+                self.execute_sub_menus(choice)
+
+           elif choice == '2':
+                print("\n Please choose from the available options:  "
+                    "\n 1. Search all reservations from date to date"
+                    "\n 0. Return to main menu")
+            
+                self.execute_sub_menus(choice)
+               
+               
+
 
     # Executing sub menus orders        
-    def execute_sub_menus(self):
+    def execute_sub_menus(self, menu_selector):
         action = input("\nsub-menu-input: ")
 
-        if action == '1':
-            self.create_new_client()
-        elif action == '2':
-            self.create_new_reservation()
-        elif action == '0':
-            self.execute()
-        elif action == '3':
-            self._hotel_m.test_search()
+        if menu_selector == '1':
+            if action == '1':
+                self.create_new_client()
+            elif action == '2':
+                self.create_new_reservation()
+            elif action == '0':
+                self.execute()
+        
+        elif menu_selector == '2':
+            if action == '1':
+                self.search_reservations_date()
+            elif action == '0':
+                self.execute()
 
     # Executing main menu orders   
     def execute(self):
@@ -63,7 +79,7 @@ class Program:
             if action == '1':
                 self.sub_menus(action)
             elif action == '2':
-                pass
+                self.sub_menus(action)
             elif action == '3':
                 pass
             elif action == '4':
@@ -79,6 +95,9 @@ class Program:
     
     def create_new_reservation(self):
         self._hotel_m.create_reservation()
+    
+    def search_reservations_date(self):
+       self._hotel_m_search.search_reservations_between_dates()
     
     def add_reservation(self):
         

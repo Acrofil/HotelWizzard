@@ -5,6 +5,7 @@ class ReadData(DatabaseConnection):
     def __init__(self):
         super().__init__()
 
+        pass
 
     def get_client(self, first_name, last_name):
         self.open_connection()
@@ -21,9 +22,17 @@ class ReadData(DatabaseConnection):
         
         return df
 
+    def search_reservation_dates(self, check_in, check_out):
+        self.open_connection()
 
-    def search_reservation(self):
-        pass
+        reservation_search_q = "SELECT * FROM reservations WHERE checkin_date >= (?) AND checkout_date <= (?)"
+
+        sql_query = pd.read_sql(reservation_search_q, self.conn, params=(check_in, check_out))
+        df = pd.DataFrame(sql_query, columns= ['id_reservation', 'reservation_number', 'titular_first_name', 'titular_last_name', 'checkin_date', 'checkout_date', 'total_days', 'date_created'])
+
+        self.close_connection()
+
+        return df
     
     def update_reservation(self):
         pass

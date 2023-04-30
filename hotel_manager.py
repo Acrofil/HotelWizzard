@@ -13,6 +13,9 @@ class HotelManager:
         self._data = CreateData()
         self._search_data = ReadData()
 
+        self.check_in = None
+        self.check_out = None
+
     def create_client(self):
         self.first_name = input("Input first name of the Client: ")
         self.last_name = input("Input last name of the Client: ")
@@ -61,15 +64,15 @@ class HotelManager:
         self.cin = input("Enter check in date D-M-Y: ")
         self.cot = input("Enter check out date D-M-Y: ")
 
-        reservation_date = datetime.now().strftime('%Y%m%d%H%M%S')
-        self.reservation_number = random.randint(1000, 9999) + int(reservation_date)
+        correct_date_format = self.date_correct_format(self.cin, self.cot)
 
-        try:
-            self.check_in = datetime.strptime(self.cin, '%d-%m-%Y').date()
-            self.check_out = datetime.strptime(self.cot, '%d-%m-%Y').date()
-        except ValueError:
+        if not correct_date_format:
             print("\nDate is not the correct format! The format is DAY-MONTH-YEAR")
             return
+            
+        # For creating reservation number
+        reservation_date = datetime.now().strftime('%Y%m%d%H%M%S')
+        self.reservation_number = random.randint(1000, 9999) + int(reservation_date)
         
         present = datetime.now()
 
@@ -157,6 +160,17 @@ class HotelManager:
 
             return True
     
+    def date_correct_format(self, cin, cot):
+
+        try:
+            self.check_in = datetime.strptime(cin, '%d-%m-%Y').date()
+            self.check_out = datetime.strptime(cot, '%d-%m-%Y').date()
+        except ValueError:
+            return False
+
+        return True
+
+    
     def validate_name_input(self):
         # Regex patterns to check for correct input
         name_pattern = '^[A-Za-z]+$'
@@ -185,3 +199,44 @@ class HotelManager:
 
     def add_reservation_holder(self, client, reservation):
         self._data.add_reservation_holder_to_database(self.client, self.reservation)
+
+
+class ManagerSearchReservations(HotelManager):
+    def __init__(self):
+        super().__init__()
+
+        pass
+    
+    # This will not check if the date is passed, Late will use it to search for older reservations too.
+    def search_reservations_between_dates(self):
+        # Ask user for starting and ending date to be used
+        print("Input the Check in and Check out dates in the format D-M-Y")
+
+        starting_date = input("\nCheck in date: ")
+        end_date = input("\nCheck out date: ")
+
+        correct_date_format = self.date_correct_format(starting_date, end_date)
+
+        if not correct_date_format:
+            print("\nDate is not the correct format! The format is DAY-MONTH-YEAR")
+            return
+        
+        reservations_data = self._search_data.search_reservation_dates(self.check_in, self.check_out)
+
+        if len(reservations_data) <= 0:
+            print("\nThere are no reservations for the selected period!")
+            return
+        
+        else:
+            print("\n---------------------------  Reservations Search  ---------------------------")
+            print(f"\nThis are the Reservations that match the selected dates for check in: {starting_date} and check out: {end_date}")
+            print()
+
+            print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
+            print()
+
+        
+        
+
+
+

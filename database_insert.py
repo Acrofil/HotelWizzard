@@ -48,7 +48,6 @@ class CreateData(DatabaseConnection):
         cl_id = self.cursor.fetchone()
         cid = cl_id[0]
 
-
         # Find the reservation id of the client
         reservation_id = self.cursor.execute("SELECT id_reservation FROM reservations WHERE reservation_number = (?)", (reservation._reservation_number, ))
         res_id = self.cursor.fetchone()
@@ -59,6 +58,3 @@ class CreateData(DatabaseConnection):
 
         # Commit the changes
         self.conn.commit()
-
-        # Close cursor and connection
-        
