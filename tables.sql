@@ -11,10 +11,12 @@ CREATE TABLE IF NOT EXISTS clients (
 CREATE TABLE IF NOT EXISTS reservations (
     id_reservation INTEGER NOT NULL,
     reservation_number INTEGER NOT NULL,
-    checkin_date TEXT NOT NULL,
-    checkout_date TEXT NOT NULL,
-    total_days TEXT NOT NULL,
-    date_created TEXT,
+    titular_first_name TEXT,
+    titular_last_name TEXT,
+    checkin_date DATE NOT NULL,
+    checkout_date DATE NOT NULL,
+    total_days DATE NOT NULL,
+    date_created DATE,
     PRIMARY KEY (id_reservation)
 );
 

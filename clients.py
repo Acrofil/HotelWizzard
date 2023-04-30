@@ -1,4 +1,4 @@
-from database_insert import Data
+from database_insert import CreateData
 
 class Client:
     def __init__(self, personal_id, first_name, last_name, phone, email):

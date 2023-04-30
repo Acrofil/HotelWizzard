@@ -7,7 +7,7 @@
 
 import sys
 import sqlite3
-from database_insert import Data
+from database_insert import CreateData
 from datetime import datetime, date, time
 from hotel_manager import HotelManager
 
@@ -15,8 +15,7 @@ from hotel_manager import HotelManager
 class Program:
     def __init__(self) -> None:
         # Create our database and database tables
-        self._data = Data()
-        self._data.create_tables()
+        
         
         self._hotel_m = HotelManager()
 
@@ -37,21 +36,22 @@ class Program:
             print("\n Please choose from available options: "
                 "\n 1. Create new Client"
                 "\n 2. Create new Reservation"
-                "\n 0. Return to main menu" )
+                "\n 0. Return to main menu")
             
             self.execute_sub_menus()
 
     # Executing sub menus orders        
     def execute_sub_menus(self):
-        action = input("sub-menu-input: ")
+        action = input("\nsub-menu-input: ")
 
         if action == '1':
             self.create_new_client()
         elif action == '2':
-            self._hotel_m.create_reservation()
+            self.create_new_reservation()
         elif action == '0':
-            print("test")
             self.execute()
+        elif action == '3':
+            self._hotel_m.test_search()
 
     # Executing main menu orders   
     def execute(self):
@@ -78,7 +78,7 @@ class Program:
         self._hotel_m.create_client()
     
     def create_new_reservation(self):
-        pass
+        self._hotel_m.create_reservation()
     
     def add_reservation(self):
         

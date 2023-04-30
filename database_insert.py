@@ -1,25 +1,10 @@
-import sqlite3
+from connect_database import DatabaseConnection
 
 # Here  will be class for creatign the database and other classes to executing differnt querys into database
-class Data:
+class CreateData(DatabaseConnection):
     def __init__(self):
-        self.filename = "tables.sql"
-
-        self.conn = sqlite3.connect("data.db")
-        self.cursor = self.conn.cursor()
-
-        self.create_tables()
-    
-    def create_tables(self):
-        with open(self.filename, "r") as sql_file:
-            self.cursor.executescript(sql_file.read())
-            self.conn.commit()
-    
-
-    #def close_connections(self):
-        #self.cursor.close()
-        #self.conn.close()
-    
+        pass
+ 
     def add_client_to_database(self, client):
         # Create querrys for client to be executed
         client_q = "INSERT INTO clients (client_personal_id, first_name, last_name, phone, email) VALUES (?, ?, ?, ?, ?)"
@@ -28,25 +13,31 @@ class Data:
         client_data = (client._personal_id, client._first_name, client._last_name, client._phone, client._email)
 
         # Insert into database
+        self.open_connection()
         self.cursor.execute(client_q, client_data)
 
         # Commit changes
         self.conn.commit()
         
+        self.close_connection()
         return True
          
     def add_reservation_to_database(self, reservation):
         # Create querrys for reservation
-        reservation_q = "INSERT INTO reservations (reservation_number, checkin_date, checkout_date, total_days, date_created) VALUES (?, ?, ?, ?, ?)"
+        reservation_q = "INSERT INTO reservations (reservation_number, titular_first_name, titular_last_name, checkin_date, checkout_date, total_days, date_created) VALUES (?, ?, ?, ?, ?, ?, ?)"
 
         # Create reservation data tuples
-        reservation_data = (reservation._reservation_number, reservation._check_in, reservation._check_out, reservation._total_stay, reservation._date_created)
+        reservation_data = (reservation._reservation_number, reservation._titular_first_name, reservation._titular_last_name, reservation._check_in, reservation._check_out, reservation._total_stay, reservation._date_created)
 
         # Insert into database table
+        self.open_connection()
         self.cursor.execute(reservation_q, reservation_data)
 
         # Commit changes
         self.conn.commit()
+
+        self.close_connection()
+        return True
 
     def add_reservation_holder_to_database(self, client, reservation):
         # Create querry to insert client id and reservation id into database
@@ -71,11 +62,3 @@ class Data:
 
         # Close cursor and connection
         
-    def search_reservation(self):
-        pass
-    
-    def update_reservation(self):
-        pass
-
-    def delete_reservation(self):
-        pass
