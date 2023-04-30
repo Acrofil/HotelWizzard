@@ -9,7 +9,7 @@
 - Program File Structure
 - User Interface Structure
 - SQLite3 Database Structure
-- [Versions updates](https://github.com/Acrofil/hotel-wizzard/VERSIONS.md)
+- [Versions updates](https://github.com/Acrofil/hotel-wizzard/blob/main/VERSIONS.md)
 
 # General Information For the Project
 
