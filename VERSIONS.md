@@ -1,5 +1,11 @@
  # Versions updates
  
+# Update v0.0.6 - 01-05.2023
+- Search all reservations by reservation number
+ 
+# Update v0.0.5 - 01.05.2023
+- Search all reservations that match titular input
+ 
 # Update v0.0.4 - 30.04.2023
 - Search all reservations in database between user input dates: Check in and Check out
 

@@ -41,8 +41,8 @@ Download all files. Run run.py. Follow the menu options.
 - [x] If there is no such client in the database promp for client creation. 
 - [x] Handle errors and correct user input for reservations
 - [x] Search reservations from date to date
-- [] Search by Reservation titular
-- [] Search by Reservation number
+- [x] Search by Reservation titular
+- [x] Search by Reservation number
 - [] Search for Client by name
 - [] Search for Client by id
 - [] Search for Client by phone
