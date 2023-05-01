@@ -45,6 +45,7 @@ class Program:
                 print("\n Please choose from the available options:  "
                     "\n 1. Search all reservations from date to date"
                     "\n 2. Search all reservations by titular names"
+                    "\n 3. Search All reservations by reservation number"
                     "\n 0. Return to main menu")
             
                 self.execute_sub_menus(choice)
@@ -69,6 +70,8 @@ class Program:
                 self.search_reservations_date()
             elif action == '2':
                 self.search_reservations_titular()
+            elif action == '3':
+                self.search_reservations_number()
             elif action == '0':
                 self.execute()
 
@@ -104,6 +107,9 @@ class Program:
     
     def search_reservations_titular(self):
         self._hotel_m_search.search_reservations_by_titular()
+    
+    def search_reservations_number(self):
+        self._hotel_m_search.search_reservations_by_number()
     
     def add_reservation(self):
         

@@ -261,6 +261,30 @@ class ManagerSearchReservations(HotelManager):
 
             print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
             print()
+    
+    def search_reservations_by_number(self):
+        print("Please input the reservation number")
+
+        number = input("\nNumber: ")
+
+        if not number.isnumeric():
+            print("Only numbers 0-9 supported!")
+            return
+
+        reservations_data = self._search_data.search_reservation_number(number)
+
+        if len(reservations_data) <= 0:
+            print(f"No reservation with number: {number}")
+            return
+        
+        elif len(reservations_data) > 0:
+
+            print("\n---------------------------  Reservations Search  ---------------------------")
+            print(f"\nThis are the Reservations that match the selected reservation number: {number}")
+            print()
+
+            print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
+            print()
 
 
 
