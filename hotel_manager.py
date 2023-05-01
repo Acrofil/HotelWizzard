@@ -206,7 +206,7 @@ class ManagerSearchReservations(HotelManager):
         super().__init__()
 
         pass
-    
+
     # This will not check if the date is passed, Late will use it to search for older reservations too.
     def search_reservations_between_dates(self):
         # Ask user for starting and ending date to be used
@@ -236,7 +236,31 @@ class ManagerSearchReservations(HotelManager):
             print()
 
         
+    def search_reservations_by_titular(self):
+        print("Please input the reservation titular names")
+
+        self.first_name = input("\nFirst name: ")
+        self.last_name = input("Last name: ")
+
+        correct_name = self.validate_name_input()
+
+        if not correct_name:
+            return
         
+        reservations_data = self._search_data.search_reservation_titular(self.first_name, self.last_name)
+
+        if len(reservations_data) <= 0:
+            print("\nThere are no reservations with these names!")
+            return
+        
+        elif len(reservations_data) > 0:
+
+            print("\n---------------------------  Reservations Search  ---------------------------")
+            print(f"\nThis are the Reservations that match the selected names for titular: {self.first_name}  {self.last_name}")
+            print()
+
+            print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
+            print()
 
 
 

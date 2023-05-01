@@ -36,7 +36,7 @@ class Program:
            if choice == '1':
                 print("\n Please choose from available options: "
                     "\n 1. Create new Client"
-                    "\n 2. Create new Reservation"
+                    "\n 2. Add new Reservation"
                     "\n 0. Return to main menu")
             
                 self.execute_sub_menus(choice)
@@ -44,6 +44,7 @@ class Program:
            elif choice == '2':
                 print("\n Please choose from the available options:  "
                     "\n 1. Search all reservations from date to date"
+                    "\n 2. Search all reservations by titular names"
                     "\n 0. Return to main menu")
             
                 self.execute_sub_menus(choice)
@@ -66,6 +67,8 @@ class Program:
         elif menu_selector == '2':
             if action == '1':
                 self.search_reservations_date()
+            elif action == '2':
+                self.search_reservations_titular()
             elif action == '0':
                 self.execute()
 
@@ -98,6 +101,9 @@ class Program:
     
     def search_reservations_date(self):
        self._hotel_m_search.search_reservations_between_dates()
+    
+    def search_reservations_titular(self):
+        self._hotel_m_search.search_reservations_by_titular()
     
     def add_reservation(self):
         

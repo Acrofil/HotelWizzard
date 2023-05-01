@@ -12,4 +12,5 @@ class Reservation:
     
 
     def __str__(self) -> str:
+        
         return f"with number: {self._reservation_number} and Client: {self._titular_first_name} {self._titular_last_name} as titular"
