@@ -47,7 +47,7 @@ Download all files. Run run.py. Follow the menu options.
 - [x] Search for Client by id
 - [x] Search for Client by phone
 - [x] Show all Clients
-- [] Show all reservations
+- [x] Show all reservations
 - [] Show all Arrivals today
 - [] Show all Departures today
 - [] Edit Client phone, name or everything
@@ -92,9 +92,9 @@ Download all files. Run run.py. Follow the menu options.
 
 # User Interface Structure
 
-- [1] Create Client or Reservation
+- [1] Add Client or Reservation
 - [1.1] Create Client
-- [1.2] Create Reservation
+- [1.2] Add Reservation
 - [1.0] Back to Main Menu
 - [2] Search for Reservation/s
 - [2.1] Search reservations from Check in to Check out
@@ -102,6 +102,12 @@ Download all files. Run run.py. Follow the menu options.
 - [2.3] Search by Client First and Last name's
 - [2.4] Show all reservations
 - [2.0] Back to Main Menu
+- [3] Search for clients
+- [3.1] Search for clients by first and last name
+- [3.2] Search for clients by the personal id
+- [3.3] Search for clients by the phone number
+- [3.4] Show all clients
+- [3.0] Return to main menu
 - [4] Edit Reservation
 - [5] Edit Client
 - [6] Delete Client
