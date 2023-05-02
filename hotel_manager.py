@@ -313,5 +313,29 @@ class ManagerSearchReservations(HotelManager):
             print()
 
 
+    def search_clients_by_id(self):
+        print("\n Please input the personal id of the client\n")
+
+        self.personal_id = input("Client Personal Id: ")
+
+        if not self.personal_id.isnumeric():
+            print("\nOnly numbers 0-9 supported!")
+            return
+        
+        clients_data = self._search_data.search_clients_id(self.personal_id)
+
+        if len(clients_data) <=0:
+            print(f"There are no clients with name: {self.first_name} {self.last_name}")
+            return
+        
+        elif len(clients_data) > 0:
+
+            print("\n---------------------------  Clients Search  ---------------------------")
+            print(f"\nClient with personal id: {self.personal_id}")
+            print()
+
+            print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
+            print()
+
 
 

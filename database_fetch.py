@@ -68,6 +68,16 @@ class ReadData(DatabaseConnection):
         df = self.get_client_data(client_search_q, search_tuple)
         
         return df
+
+    def search_clients_id(self, personal_id):
+
+        client_search_q = "SELECT * FROM clients WHERE client_personal_id = (?)"
+
+        search_tuple = (personal_id, )
+
+        df = self.get_client_data(client_search_q, search_tuple)
+
+        return df
         
 
     
