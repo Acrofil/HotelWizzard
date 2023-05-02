@@ -366,10 +366,23 @@ class ManagerSearchReservations(HotelManager):
         
         clients_data = self._search_data.get_all_clients()
 
-        print("\n---------------------------  Clients  ---------------------------")
+        print("\n---------------------------  All Clients  ---------------------------")
         print(f"\nAll clients in the database")
         print()
 
         print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
         print()
+
+    def search_all_reservations(self):
+
+        reservations_data = self._search_data.get_all_reservations()
+
+        print("\n---------------------------  All Reservations  ---------------------------")
+        print(f"\nAll reservations in the database")
+        print()
+
+        print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
+        print()
+
+
 

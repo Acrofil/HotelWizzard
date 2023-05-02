@@ -20,6 +20,16 @@ class ReadData(DatabaseConnection):
 
         return df
 
+    def get_all_reservations(self):
+        self.open_connection()
+
+        reservations_search_q = "SELECT * FROM reservations"
+
+        sql_query = pd.read_sql(reservations_search_q, self.conn)
+        df = pd.DataFrame(sql_query, columns= ['id_reservation', 'reservation_number', 'titular_first_name', 'titular_last_name', 'checkin_date', 'checkout_date', 'total_days', 'date_created'])
+
+        return df
+
     
     def get_client_data(self, search_query, search_tuple):
         self.open_connection()

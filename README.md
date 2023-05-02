@@ -43,9 +43,10 @@ Download all files. Run run.py. Follow the menu options.
 - [x] Search reservations from date to date
 - [x] Search by Reservation titular
 - [x] Search by Reservation number
-- [] Search for Client by name
-- [] Search for Client by id
-- [] Search for Client by phone
+- [x] Search for Client by name
+- [x] Search for Client by id
+- [x] Search for Client by phone
+- [x] Show all Clients
 - [] Show all reservations
 - [] Show all Arrivals today
 - [] Show all Departures today

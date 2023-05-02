@@ -47,6 +47,7 @@ class Program:
                     "\n 1. Search all reservations from date to date"
                     "\n 2. Search all reservations by titular names"
                     "\n 3. Search All reservations by reservation number"
+                    "\n 4. Show all reservations"
                     "\n 0. Return to main menu")
             
                 self.execute_sub_menus(menu_selector)
@@ -80,6 +81,8 @@ class Program:
                 self.search_reservations_titular()
             elif action == '3':
                 self.search_reservations_number()
+            elif action == '4':
+                self.show_all_reservations()
             elif action == '0':
                 self.execute()
 
@@ -142,6 +145,9 @@ class Program:
     
     def show_all_clients(self):
         self._hotel_m_search.search_all_clients()
+    
+    def show_all_reservations(self):
+        self._hotel_m_search.search_all_reservations()
     
     def add_reservation(self):
         
