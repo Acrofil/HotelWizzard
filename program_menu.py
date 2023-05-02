@@ -56,6 +56,7 @@ class Program:
                     "\n1. Search for client by first and last name"
                     "\n2. Search for client by the personal Id"
                     "\n3. Search for client by phone number"
+                    "\n4. Show all Clients"
                     "\n0. Return to main menu")
                 
                 self.execute_sub_menus(menu_selector)
@@ -89,6 +90,8 @@ class Program:
                 self.search_client_id()
             elif action == '3':
                 self.search_client_phone()
+            elif action == '4':
+                self.show_all_clients()
             elif action == '0':
                 self.execute()
 
@@ -136,6 +139,9 @@ class Program:
     
     def search_client_phone(self):
         self._hotel_m_search.search_clients_by_phone()
+    
+    def show_all_clients(self):
+        self._hotel_m_search.search_all_clients()
     
     def add_reservation(self):
         
