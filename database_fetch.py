@@ -78,9 +78,17 @@ class ReadData(DatabaseConnection):
         df = self.get_client_data(client_search_q, search_tuple)
 
         return df
-        
 
-    
+    def search_clients_phone(self, phone_number):
+
+        client_search_q = "SELECT * FROM clients WHERE phone = (?)"
+
+        search_tuple = (phone_number, )
+
+        df = self.get_client_data(client_search_q, search_tuple)
+
+        return df
+        
     def update_reservation(self):
         pass
 

@@ -337,5 +337,27 @@ class ManagerSearchReservations(HotelManager):
             print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
             print()
 
+    def search_clients_by_phone(self):
+        print("\n Please input the client phone number")
 
+        self.phone = input("Phone number: ")
 
+        correct_input = self.validate_phone()
+
+        if not correct_input:
+            return
+        
+        clients_data = self._search_data.search_clients_phone(self.phone)
+
+        if len(clients_data) <= 0:
+            print(f"There are no clients with phone number: {self.phone}")
+            return
+        
+        elif len(clients_data) > 0:
+
+            print("\n---------------------------  Clients Search  ---------------------------")
+            print(f"\nClients with phone number: {self.phone}")
+            print()
+
+            print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
+            print()
