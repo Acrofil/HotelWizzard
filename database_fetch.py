@@ -7,19 +7,15 @@ class ReadData(DatabaseConnection):
 
         pass
 
-    def get_client(self, first_name, last_name):
+    
+    def get_client_data(self, search_query, search_tuple):
         self.open_connection()
 
-        client_search_q = "SELECT * FROM clients WHERE first_name = (?) COLLATE NOCASE AND last_name = (?) COLLATE NOCASE"
-
-        client_first_name = first_name
-        client_last_name = last_name
-
-        sql_query = pd.read_sql(client_search_q, self.conn, params=(client_first_name, client_last_name))
-        df = pd.DataFrame(sql_query, columns = ['id_client', 'client_personal_id', 'first_name', 'last_name','phone','email'])
+        sql_query = pd.read_sql(search_query, self.conn, params=search_tuple)
+        df = pd.DataFrame(sql_query, columns= ['id_client', 'client_personal_id', 'first_name', 'last_name','phone','email'])
 
         self.close_connection()
-        
+
         return df
     
     def get_reservations_data(self, search_query, search_tuple):
@@ -60,6 +56,17 @@ class ReadData(DatabaseConnection):
 
         df = self.get_reservations_data(reservation_search_q, search_tuple)
 
+        return df
+    
+
+    def search_clients_names(self, first_name, last_name):
+
+        client_search_q = "SELECT * FROM clients WHERE first_name = (?) COLLATE NOCASE AND last_name = (?) COLLATE NOCASE"
+
+        search_tuple = (first_name, last_name)
+
+        df = self.get_client_data(client_search_q, search_tuple)
+        
         return df
         
 

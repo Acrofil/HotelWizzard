@@ -97,7 +97,7 @@ class HotelManager:
     def check_db_client_exists(self):
         
         # Search database for first and last name matches and return all data that match
-        data = self._search_data.get_client(self.first_name, self.last_name)
+        data = self._search_data.search_clients_names(self.first_name, self.last_name)
 
         # If 0 == no match. Add it or Quit
         if len(data) <= 0:
@@ -285,6 +285,33 @@ class ManagerSearchReservations(HotelManager):
 
             print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
             print()
+
+
+    def search_clients_by_name(self):
+        print("\nPlease input the client names\n")
+
+        self.first_name = input("First name: ")
+        self.last_name = input("Last name: ")
+
+        correct_name_input = self.validate_name_input()
+        if not correct_name_input:
+            return
+
+        clients_data = self._search_data.search_clients_names(self.first_name, self.last_name)
+
+        if len(clients_data) <=0:
+            print(f"There are no clients with name: {self.first_name} {self.last_name}")
+            return
+        
+        elif len(clients_data) > 0:
+
+            print("\n---------------------------  Clients Search  ---------------------------")
+            print(f"\nThis are the clients that match the names: {self.first_name} {self.last_name}")
+            print()
+
+            print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
+            print()
+
 
 
 
