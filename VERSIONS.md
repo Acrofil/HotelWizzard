@@ -1,13 +1,17 @@
 # Versions updates
 
-## Update v0.0.7 - 02-05.2023
+## Update v0.0.8 - 04.05.2023
+- Added Show all Arrivals Today
+- Added Show all Departures Today
+
+## Update v0.0.7 - 02.05.2023
 - Search for client by first and last name
 - Search for client by his phone number
 - Search for client by personal id
 - Show all clients in database
 - Show all reservations in database
  
-## Update v0.0.6 - 01-05.2023
+## Update v0.0.6 - 01.05.2023
 - Search all reservations by reservation number
  
 ## Update v0.0.5 - 01.05.2023
