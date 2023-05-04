@@ -111,6 +111,16 @@ class ReadData(DatabaseConnection):
         df = self.get_client_data(client_search_q, search_tuple)
 
         return df
+    
+    def search_arrivals_today(self, today):
+
+        reservations_search_q = "SELECT * FROM reservations where checkin_date = (?)"
+
+        search_tuple = (today, )
+
+        df = self.get_reservations_data(reservations_search_q, search_tuple)
+
+        return df
 
         
     def update_reservation(self):

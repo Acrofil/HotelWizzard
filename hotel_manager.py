@@ -385,4 +385,21 @@ class ManagerSearchReservations(HotelManager):
         print()
 
 
+    def all_arrivals_today(self):
+
+        today = date.today()
+        
+        today_arrivals = self._search_data.search_arrivals_today(today)
+
+        if len(today_arrivals) <= 0:
+            print("\nThere are no arrivals today\n")
+        
+        else:
+
+            print("\n---------------------------  All Arrivals Today  ---------------------------")
+            print(f"\nToday's arrivals")
+            print()
+
+            print(tabulate(today_arrivals.set_index('id_reservation'), headers='keys', tablefmt='psql'))
+            print()
 

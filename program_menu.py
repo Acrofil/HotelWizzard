@@ -26,9 +26,10 @@ class Program:
             "\n 1. Add Client or Reservation"
             "\n 2. Search for reservation"
             "\n 3. Search for clients"
-            "\n 4. Edit reservation"
-            "\n 5. See all reservations"
-            "\n 6. Remove reservation"
+            "\n 4. Show all arrivals today"
+            "\n 5. Edit reservation"
+            "\n 6. See all reservations"
+            "\n 7. Remove reservation"
             "\n 0. Exit program")    
 
     # Sub menus
@@ -61,6 +62,7 @@ class Program:
                     "\n0. Return to main menu")
                 
                 self.execute_sub_menus(menu_selector)
+               
 
     # Executing sub menus orders        
     def execute_sub_menus(self, menu_selector):
@@ -112,7 +114,7 @@ class Program:
             elif action == '3':
                 self.sub_menus(action)
             elif action == '4':
-                pass
+                self.arrivals_today()
             elif action == '5':
                 pass
             elif action == '0':
@@ -148,6 +150,10 @@ class Program:
     
     def show_all_reservations(self):
         self._hotel_m_search.search_all_reservations()
+    
+    def arrivals_today(self):
+        self._hotel_m_search.all_arrivals_today()
+    
     
     def add_reservation(self):
         
