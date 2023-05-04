@@ -48,8 +48,8 @@ Download all files. Run run.py. Follow the menu options.
 - [x] Search for Client by phone
 - [x] Show all Clients
 - [x] Show all reservations
-- [] Show all Arrivals today
-- [] Show all Departures today
+- [x] Show all Arrivals today
+- [x] Show all Departures today
 - [] Edit Client phone, name or everything
 - [] Edit reservation dates. 
 - [] Delete Client
@@ -108,10 +108,12 @@ Download all files. Run run.py. Follow the menu options.
 - [3.3] Search for clients by the phone number
 - [3.4] Show all clients
 - [3.0] Return to main menu
-- [4] Edit Reservation
-- [5] Edit Client
-- [6] Delete Client
-- [7] Delete Reservation
+- [4] Show all arrival's today
+- [5] Show all departure's today
+- [6] Edit Reservation
+- [7] Edit Client
+- [8] Delete Client
+- [9] Delete Reservation
 - [0] Exit Program
 
 The user should not have direct acces to client and reservation properties and other data. 
