@@ -18,6 +18,11 @@ class HotelManager:
         self.check_in = None
         self.check_out = None
 
+        self.clients_search = "Clients Search"
+        self.reservations_search = "Reservations Search"
+        self.arrivals = "All Arrivals Today"
+        self.departures = "All Departures Today"
+
     def create_client(self):
         self.first_name = input("Input first name of the Client: ")
         self.last_name = input("Input last name of the Client: ")
@@ -43,11 +48,11 @@ class HotelManager:
         client_personal_id = datetime.now().strftime('%Y%m%d%H%M%S')
       
         # Client object
-        client = Client(client_personal_id, self.first_name, self.last_name, self.phone, self.email)
-        add_client = self._data.add_client_to_database(client)
+        self.client = Client(client_personal_id, self.first_name, self.last_name, self.phone, self.email)
+        add_client = self._data.add_client_to_database(self.client)
 
         if add_client:
-            print(f"\n Client {client} created and added to the database successfully!")
+            print(f"\n Client {self.client} created and added to the database successfully!")
 
     def create_reservation(self):
         self.first_name = input("\nReservation titular first name: ")
@@ -90,14 +95,29 @@ class HotelManager:
             return
         
         # Reservation object
-        reservation = Reservation(self.reservation_number, self.first_name, self.last_name, self.check_in, self.check_out, total_stay.days)
-        add_reservation = self._data.add_reservation_to_database(reservation)
+        self.reservation = Reservation(self.reservation_number, self.first_name, self.last_name, self.check_in, self.check_out, total_stay.days)
+        add_reservation = self._data.add_reservation_to_database(self.reservation)
 
         if add_reservation:
-            print(f"\nReservation {reservation} added successfully!")
+            print(f"\nReservation {self.reservation} added successfully!")
     
-    def check_db_client_exists(self):
-        
+    def print_reservations_search_data(self, data, print_text, action_type):
+
+        print(f"\n---------------------------  {action_type} ---------------------------")
+        print(print_text)
+        print()
+        print(tabulate(data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
+        print()
+    
+    def print_clients_search_data(self, data, print_text, action_type):
+
+        print(f"\n---------------------------  {action_type}  ---------------------------")
+        print(print_text)
+        print()
+        print(tabulate(data.set_index('id_client'), headers='keys', tablefmt='psql'))
+        print()
+    
+    def check_db_client_exists(self):    
         # Search database for first and last name matches and return all data that match
         data = self._search_data.search_clients_names(self.first_name, self.last_name)
 
@@ -116,13 +136,8 @@ class HotelManager:
 
         # If > 0 we have data. Print all data    
         elif len(data) > 0:
-
-            print("\n---------------------------  Clients Search  ---------------------------")
-            print(f"\nThis are the Clients that match the reservation titular - {self.first_name} {self.last_name}")
-            print()
-
-            print(tabulate(data.set_index('id_client'), headers='keys', tablefmt='psql'))
-            print()
+            print_text = f"\nThis are the Clients that match the reservation titular - {self.first_name} {self.last_name}"
+            self.print_clients_search_data(data, print_text, self.clients_search)
 
             print("Please input the id_client number to add as titular of the reservation - 0 to exit.")
             
@@ -206,7 +221,6 @@ class HotelManager:
 class ManagerSearchReservations(HotelManager):
     def __init__(self):
         super().__init__()
-
         pass
 
     # This will not check if the date is passed, Late will use it to search for older reservations too.
@@ -230,14 +244,9 @@ class ManagerSearchReservations(HotelManager):
             return
         
         else:
-            print("\n---------------------------  Reservations Search  ---------------------------")
-            print(f"\nThis are the Reservations that match the selected dates for check in: {starting_date} and check out: {end_date}")
-            print()
-
-            print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
-            print()
-
-        
+            print_text = f"\nThis are the Reservations that match the selected dates for check in: {starting_date} and check out: {end_date}"
+            self.print_reservations_search_data(reservations_data, print_text, self.reservations_search)
+       
     def search_reservations_by_titular(self):
         print("Please input the reservation titular names")
 
@@ -256,13 +265,8 @@ class ManagerSearchReservations(HotelManager):
             return
         
         elif len(reservations_data) > 0:
-
-            print("\n---------------------------  Reservations Search  ---------------------------")
-            print(f"\nThis are the Reservations that match the selected names for titular: {self.first_name}  {self.last_name}")
-            print()
-
-            print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
-            print()
+            print_text = f"\nThis are the Reservations that match the selected names for titular: {self.first_name}  {self.last_name}"
+            self.print_reservations_search_data(reservations_data, print_text, self.reservations_search)
     
     def search_reservations_by_number(self):
         print("Please input the reservation number")
@@ -280,14 +284,8 @@ class ManagerSearchReservations(HotelManager):
             return
         
         elif len(reservations_data) > 0:
-
-            print("\n---------------------------  Reservations Search  ---------------------------")
-            print(f"\nThis are the Reservations that match the selected reservation number: {number}")
-            print()
-
-            print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
-            print()
-
+            print_text = f"\nThis are the Reservations that match the selected reservation number: {number}"
+            self.print_reservations_search_data(reservations_data, print_text, self.reservations_search)
 
     def search_clients_by_name(self):
         print("\nPlease input the client names\n")
@@ -306,17 +304,12 @@ class ManagerSearchReservations(HotelManager):
             return
         
         elif len(clients_data) > 0:
-
-            print("\n---------------------------  Clients Search  ---------------------------")
-            print(f"\nThis are the clients that match the names: {self.first_name} {self.last_name}")
-            print()
-
-            print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
-            print()
+            print_text = f"\nThis are the clients that match the names: {self.first_name} {self.last_name}"
+            self.print_clients_search_data(clients_data, print_text, self.clients_search)
 
 
     def search_clients_by_id(self):
-        print("\n Please input the personal id of the client\n")
+        print("\nPlease input the personal id of the client\n")
 
         self.personal_id = input("Client Personal Id: ")
 
@@ -326,18 +319,13 @@ class ManagerSearchReservations(HotelManager):
         
         clients_data = self._search_data.search_clients_id(self.personal_id)
 
-        if len(clients_data) <=0:
+        if len(clients_data) <= 0:
             print(f"There are no clients with name: {self.first_name} {self.last_name}")
             return
         
         elif len(clients_data) > 0:
-
-            print("\n---------------------------  Clients Search  ---------------------------")
-            print(f"\nClient with personal id: {self.personal_id}")
-            print()
-
-            print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
-            print()
+            print_text = f"\nClient with personal id: {self.personal_id}"
+            self.print_clients_search_data(clients_data, print_text, self.clients_search)
 
     def search_clients_by_phone(self):
         print("\n Please input the client phone number")
@@ -356,70 +344,40 @@ class ManagerSearchReservations(HotelManager):
             return
         
         elif len(clients_data) > 0:
-
-            print("\n---------------------------  Clients Search  ---------------------------")
-            print(f"\nClients with phone number: {self.phone}")
-            print()
-
-            print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
-            print()
+            print_text = f"\nClients with phone number: {self.phone}"
+            self.print_clients_search_data(clients_data, print_text, self.clients_search)
 
     def search_all_clients(self):
-        
         clients_data = self._search_data.get_all_clients()
-
-        print("\n---------------------------  All Clients  ---------------------------")
-        print(f"\nAll clients in the database")
-        print()
-
-        print(tabulate(clients_data.set_index('id_client'), headers='keys', tablefmt='psql'))
-        print()
+        print_text = f"\nAll clients in the database"
+        self.print_clients_search_data(clients_data, print_text, self.clients_search)
 
     def search_all_reservations(self):
-
         reservations_data = self._search_data.get_all_reservations()
 
-        print("\n---------------------------  All Reservations  ---------------------------")
-        print(f"\nAll reservations in the database")
-        print()
-
-        print(tabulate(reservations_data.set_index('id_reservation'), headers='keys', tablefmt='psql'))
-        print()
+        print_text = f"\nAll reservations in the database"
+        self.print_reservations_search_data(reservations_data, print_text, self.reservations_search)
 
 
     def all_arrivals_today(self):
-
-        search_key = "arrivals"
-        
+        search_key = "arrivals" 
         today_arrivals = self._search_data.search_arrivals_or_departures_today(self.today, search_key)
 
         if len(today_arrivals) <= 0:
             print("\nThere are no arrivals today\n")
         
         else:
-
-            print("\n---------------------------  All Arrivals Today  ---------------------------")
-            print(f"\nToday's arrivals")
-            print()
-
-            print(tabulate(today_arrivals.set_index('id_reservation'), headers='keys', tablefmt='psql'))
-            print()
+            print_text = f"\nToday's arrivals"
+            self.print_reservations_search_data(today_arrivals, print_text, self.arrivals)
     
     def all_departures_today(self):
-
         search_key = "departures"
-
         today_departures = self._search_data.search_arrivals_or_departures_today(self.today, search_key)
 
         if len(today_departures) <= 0:
             print("\nThere are no departures today\n")
         
         else:
-
-            print("\n---------------------------  All Arrivals Today  ---------------------------")
-            print(f"\nToday's arrivals")
-            print()
-
-            print(tabulate(today_departures.set_index('id_reservation'), headers='keys', tablefmt='psql'))
-            print()
+            print_text = f"\nToday's arrivals"
+            self.print_reservations_search_data(today_departures, print_text, self.departures)
 

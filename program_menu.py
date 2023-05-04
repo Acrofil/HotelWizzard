@@ -64,10 +64,9 @@ class Program:
                 
                 self.execute_sub_menus(menu_selector)
                
-
     # Executing sub menus orders        
     def execute_sub_menus(self, menu_selector):
-        action = input("\nsub-menu-input: ")
+        action = input(f"\nSub-menu-{menu_selector}-input: ")
 
         if menu_selector == '1':
             if action == '1':
@@ -106,7 +105,7 @@ class Program:
         self.menu()
 
         while True:
-            action = input("Input: ")
+            action = input("Main-menu-input: ")
 
             if action == '1':
                 self.sub_menus(action)

@@ -28,6 +28,8 @@ class ReadData(DatabaseConnection):
         sql_query = pd.read_sql(reservations_search_q, self.conn)
         df = pd.DataFrame(sql_query, columns= ['id_reservation', 'reservation_number', 'titular_first_name', 'titular_last_name', 'checkin_date', 'checkout_date', 'total_days', 'date_created'])
 
+        self.close_connection()
+
         return df
 
     
@@ -51,8 +53,7 @@ class ReadData(DatabaseConnection):
 
         return df
 
-    def search_reservation_dates(self, check_in, check_out):
-        
+    def search_reservation_dates(self, check_in, check_out):    
         reservation_search_q = "SELECT * FROM reservations WHERE checkin_date >= (?) AND checkout_date <= (?)"
 
         search_tuple = (check_in, check_out)
@@ -62,7 +63,6 @@ class ReadData(DatabaseConnection):
         return df
     
     def search_reservation_titular(self, first_name, last_name):
-
         reservation_search_q = "SELECT * FROM reservations WHERE titular_first_name = (?) COLLATE NOCASE AND titular_last_name = (?) COLLATE NOCASE "
 
         search_tuple = (first_name, last_name)
@@ -72,7 +72,6 @@ class ReadData(DatabaseConnection):
         return df
 
     def search_reservation_number(self, number):
-
         reservation_search_q = "SELECT * FROM reservations WHERE reservation_number = (?)"
 
         search_tuple = (number,)
@@ -83,7 +82,6 @@ class ReadData(DatabaseConnection):
     
 
     def search_clients_names(self, first_name, last_name):
-
         client_search_q = "SELECT * FROM clients WHERE first_name = (?) COLLATE NOCASE AND last_name = (?) COLLATE NOCASE"
 
         search_tuple = (first_name, last_name)
@@ -93,7 +91,6 @@ class ReadData(DatabaseConnection):
         return df
 
     def search_clients_id(self, personal_id):
-
         client_search_q = "SELECT * FROM clients WHERE client_personal_id = (?)"
 
         search_tuple = (personal_id, )
@@ -103,7 +100,6 @@ class ReadData(DatabaseConnection):
         return df
 
     def search_clients_phone(self, phone_number):
-
         client_search_q = "SELECT * FROM clients WHERE phone = (?)"
 
         search_tuple = (phone_number, )
@@ -113,7 +109,6 @@ class ReadData(DatabaseConnection):
         return df
     
     def search_arrivals_or_departures_today(self, today, search_key):
-
         if search_key == 'arrivals':
 
             reservations_search_q = "SELECT * FROM reservations where checkin_date = (?)"
