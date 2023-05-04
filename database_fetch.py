@@ -112,16 +112,22 @@ class ReadData(DatabaseConnection):
 
         return df
     
-    def search_arrivals_today(self, today):
+    def search_arrivals_or_departures_today(self, today, search_key):
 
-        reservations_search_q = "SELECT * FROM reservations where checkin_date = (?)"
+        if search_key == 'arrivals':
+
+            reservations_search_q = "SELECT * FROM reservations where checkin_date = (?)"
+        
+        elif search_key == 'departures':
+
+            reservations_search_q = "SELECT * FROM reservations where checkout_date = (?)"
 
         search_tuple = (today, )
 
         df = self.get_reservations_data(reservations_search_q, search_tuple)
 
         return df
-
+    
         
     def update_reservation(self):
         pass

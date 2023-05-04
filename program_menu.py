@@ -27,9 +27,10 @@ class Program:
             "\n 2. Search for reservation"
             "\n 3. Search for clients"
             "\n 4. Show all arrivals today"
-            "\n 5. Edit reservation"
-            "\n 6. See all reservations"
-            "\n 7. Remove reservation"
+            "\n 5. Show all departures today"
+            "\n 6. Edit reservation"
+            "\n 7. See all reservations"
+            "\n 8. Remove reservation"
             "\n 0. Exit program")    
 
     # Sub menus
@@ -116,7 +117,7 @@ class Program:
             elif action == '4':
                 self.arrivals_today()
             elif action == '5':
-                pass
+                self.departures_today()
             elif action == '0':
                 print()
                 sys.exit()
@@ -153,6 +154,9 @@ class Program:
     
     def arrivals_today(self):
         self._hotel_m_search.all_arrivals_today()
+    
+    def departures_today(self):
+        self._hotel_m_search.all_departures_today()
     
     
     def add_reservation(self):
