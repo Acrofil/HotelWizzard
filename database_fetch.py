@@ -1,13 +1,13 @@
 from connect_database import DatabaseConnection
+from database_insert import CreateData
 import pandas as pd
 
-class ReadData(DatabaseConnection):
+class ReadData(CreateData):
     def __init__(self):
         super().__init__()
 
         pass
     
-
     def get_all_clients(self):
         self.open_connection()
 
@@ -122,16 +122,3 @@ class ReadData(DatabaseConnection):
         df = self.get_reservations_data(reservations_search_q, search_tuple)
 
         return df
-    
-        
-    def update_reservation(self):
-        pass
-
-    def delete_reservation(self):
-        pass
-        
-
-            
-
-    
-    

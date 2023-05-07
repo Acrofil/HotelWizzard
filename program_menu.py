@@ -10,16 +10,15 @@ import sqlite3
 from database_insert import CreateData
 from datetime import datetime, date, time
 from hotel_manager import HotelManager
-from hotel_manager import ManagerSearchReservations
-
+from hotel_manager import ManagerSearch
 
 class Program:
     def __init__(self) -> None:
         # Create our database and database tables
         
         self._hotel_m = HotelManager()
-        self._hotel_m_search = ManagerSearchReservations()
-
+        self._hotel_m_search = ManagerSearch()
+        
     # Main menu 
     def menu(self):      
         print("\n Welcome to Hotel Wizzard! Please select what task would you like to perform?"
@@ -28,9 +27,6 @@ class Program:
             "\n 3. Search for clients"
             "\n 4. Show all arrivals today"
             "\n 5. Show all departures today"
-            "\n 6. Edit reservation"
-            "\n 7. See all reservations"
-            "\n 8. Remove reservation"
             "\n 0. Exit program")    
 
     # Sub menus

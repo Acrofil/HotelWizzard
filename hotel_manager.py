@@ -23,7 +23,7 @@ class HotelManager:
         self.arrivals = "All Arrivals Today"
         self.departures = "All Departures Today"
 
-    def create_client(self):
+    def create_client(self, update=False):
         self.first_name = input("Input first name of the Client: ")
         self.last_name = input("Input last name of the Client: ")
 
@@ -218,7 +218,7 @@ class HotelManager:
         self._data.add_reservation_holder_to_database(self.client, self.reservation)
 
 
-class ManagerSearchReservations(HotelManager):
+class ManagerSearch(HotelManager):
     def __init__(self):
         super().__init__()
         pass
@@ -380,4 +380,3 @@ class ManagerSearchReservations(HotelManager):
         else:
             print_text = f"\nToday's arrivals"
             self.print_reservations_search_data(today_departures, print_text, self.departures)
-
