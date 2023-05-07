@@ -4,6 +4,7 @@ from clients import Client
 from reservations import Reservation
 from database_insert import CreateData
 from database_fetch import ReadData
+from database_fetch import EditData
 import re
 import pandas as pd
 from tabulate import tabulate
@@ -12,6 +13,7 @@ class HotelManager:
     def __init__(self):
         self._data = CreateData()
         self._search_data = ReadData()
+        self._edit_data = EditData()
 
         self.today = date.today()
 
@@ -22,6 +24,9 @@ class HotelManager:
         self.reservations_search = "Reservations Search"
         self.arrivals = "All Arrivals Today"
         self.departures = "All Departures Today"
+
+        self.update = True
+        self.client_id = None
 
     def create_client(self, update=False):
         self.first_name = input("Input first name of the Client: ")
@@ -41,6 +46,10 @@ class HotelManager:
 
         correct_email_input = self.validate_email()
         if not correct_email_input:
+            return
+
+        if update:
+            self._edit_data.edit_client_data(self.client_id, self.first_name, self.last_name, self.phone, self.email)
             return
         
         # Generates id number with current date and time
@@ -380,3 +389,16 @@ class ManagerSearch(HotelManager):
         else:
             print_text = f"\nToday's arrivals"
             self.print_reservations_search_data(today_departures, print_text, self.departures)
+
+class ManagerEdit(ManagerSearch):
+    def __init__(self):
+            super().__init__()
+            pass
+
+
+    def edit_client(self):
+
+        self.search_all_clients()
+        print('\nPlease choose id_client to edit that client')
+        self.client_id = input("Client id input: ")
+        self.create_client(self.update)

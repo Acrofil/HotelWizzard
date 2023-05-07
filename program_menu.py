@@ -11,6 +11,7 @@ from database_insert import CreateData
 from datetime import datetime, date, time
 from hotel_manager import HotelManager
 from hotel_manager import ManagerSearch
+from hotel_manager import ManagerEdit
 
 class Program:
     def __init__(self) -> None:
@@ -18,7 +19,8 @@ class Program:
         
         self._hotel_m = HotelManager()
         self._hotel_m_search = ManagerSearch()
-        
+        self._hotel_m_edit = ManagerEdit()
+
     # Main menu 
     def menu(self):      
         print("\n Welcome to Hotel Wizzard! Please select what task would you like to perform?"
@@ -27,7 +29,9 @@ class Program:
             "\n 3. Search for clients"
             "\n 4. Show all arrivals today"
             "\n 5. Show all departures today"
-            "\n 0. Exit program")    
+            "\n 6. Edit or Delete Clients/Reservations"
+            "\n 7. Edit reservation"
+            "\n 0. Exit program")      
 
     # Sub menus
     def sub_menus(self, menu_selector):
@@ -56,6 +60,16 @@ class Program:
                     "\n2. Search for client by the personal Id"
                     "\n3. Search for client by phone number"
                     "\n4. Show all Clients"
+                    "\n0. Return to main menu")
+                
+                self.execute_sub_menus(menu_selector)
+
+           elif menu_selector == '6':
+                print("\nPlease choose from the available options: "
+                    "\n1. Edit Client"
+                    "\n2. Edit Reservation"
+                    "\n3. Delete Client"
+                    "\n4. Delete Reservation"
                     "\n0. Return to main menu")
                 
                 self.execute_sub_menus(menu_selector)
@@ -96,6 +110,13 @@ class Program:
             elif action == '0':
                 self.execute()
 
+        elif menu_selector == '6':
+            if action == '1':
+                self.edit_client()
+            elif action == '0':
+                self.execute()
+				
+
     # Executing main menu orders   
     def execute(self):
         self.menu()
@@ -113,6 +134,8 @@ class Program:
                 self.arrivals_today()
             elif action == '5':
                 self.departures_today()
+            elif action == '6':
+                self.sub_menus(action)		
             elif action == '0':
                 print()
                 sys.exit()
@@ -152,6 +175,10 @@ class Program:
     
     def departures_today(self):
         self._hotel_m_search.all_departures_today()
+    
+    def edit_client(self):
+        self._hotel_m_edit.edit_client()
+   
     
     
     def add_reservation(self):

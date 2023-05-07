@@ -122,3 +122,20 @@ class ReadData(CreateData):
         df = self.get_reservations_data(reservations_search_q, search_tuple)
 
         return df
+    
+class EditData(ReadData):
+    def __init__(self):
+            super().__init__()
+            pass
+
+
+    def edit_client_data(self, client_id, first_name, last_name, phone, email):
+        self.open_connection()
+
+        client_edit_q = "UPDATE clients SET first_name = (?), last_name = (?), phone = (?), email = (?) WHERE id_client = (?)"
+
+        client_tuple = (first_name, last_name, phone, email, client_id)
+
+        self.cursor.execute(client_edit_q, client_tuple)
+        self.conn.commit()
+        self.close_connection()
