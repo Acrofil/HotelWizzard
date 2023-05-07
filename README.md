@@ -50,7 +50,7 @@ Download all files. Run run.py. Follow the menu options.
 - [x] Show all reservations
 - [x] Show all Arrivals today
 - [x] Show all Departures today
-- [] Edit Client phone, name or everything
+- [x] Edit Client
 - [] Edit reservation dates. 
 - [] Delete Client
 - [] Delete Reservation
