@@ -139,3 +139,26 @@ class EditData(ReadData):
         self.cursor.execute(client_edit_q, client_tuple)
         self.conn.commit()
         self.close_connection()
+
+    def edit_reservation_client(self, first_name, last_name, reservation_id):
+        self.open_connection()
+
+        reservation_edit_q = "UPDATE reservations SET titular_first_name = (?), titular_last_name = (?) WHERE id_reservation = (?)"
+        reservation_tuple = (first_name, last_name, reservation_id)
+
+        self.cursor.execute(reservation_edit_q, reservation_tuple)
+        self.conn.commit()
+        self.close_connection()
+    
+    def edit_reservation_dates(self, check_in, check_out, total_days, reservation_id):
+        self.open_connection()
+
+        reservation_edit_q = "UPDATE reservations SET checkin_date = (?), checkout_date = (?), total_days = (?) WHERE id_reservation = (?)"
+        reservation_tuple = (check_in, check_out, total_days, reservation_id)
+        self.cursor.execute(reservation_edit_q, reservation_tuple)
+        self.conn.commit()
+        self.close_connection()
+        
+
+        
+        

@@ -19,14 +19,20 @@ class HotelManager:
 
         self.check_in = None
         self.check_out = None
+        self.reservation_id = None
 
         self.clients_search = "Clients Search"
         self.reservations_search = "Reservations Search"
         self.arrivals = "All Arrivals Today"
         self.departures = "All Departures Today"
 
-        self.update = True
+        # Bool values for when updating reservation
+        self.update_dates = False
+        self.update_client = False
+
+        # Bool/values for when updating client
         self.client_id = None
+        self.update = True
 
     def create_client(self, update=False):
         self.first_name = input("Input first name of the Client: ")
@@ -63,19 +69,25 @@ class HotelManager:
         if add_client:
             print(f"\n Client {self.client} created and added to the database successfully!")
 
-    def create_reservation(self):
-        self.first_name = input("\nReservation titular first name: ")
-        self.last_name = input("Reservation titular last name: ")
+    def create_reservation(self, update_dates=False, update_client=False):
+        if not update_dates:
+            self.first_name = input("\nReservation titular first name: ")
+            self.last_name = input("Reservation titular last name: ")
 
-        correct_name_input = self.validate_name_input()
+            correct_name_input = self.validate_name_input()
 
-        if not correct_name_input:
-            return
-        
-        titular_in_database = self.check_db_client_exists()
+            if not correct_name_input:
+                return
+            
+            titular_in_database = self.check_db_client_exists()
 
-        if not titular_in_database:
-            return
+            if not titular_in_database:
+                return
+            
+            if update_client:
+                self._edit_data.edit_reservation_client(self.first_name, self.last_name, self.reservation_id)
+                return
+            
         
         self.cin = input("Enter check in date D-M-Y: ")
         self.cot = input("Enter check out date D-M-Y: ")
@@ -85,7 +97,7 @@ class HotelManager:
         if not correct_date_format:
             print("\nDate is not the correct format! The format is DAY-MONTH-YEAR")
             return
-            
+           
         # For creating reservation number
         reservation_date = datetime.now().strftime('%Y%m%d%H%M%S')
         self.reservation_number = random.randint(1000, 9999) + int(reservation_date)
@@ -101,6 +113,10 @@ class HotelManager:
 
         if total_stay.days <= 0:
             print("The minimum possible days to stay is 1 day!")
+            return
+        
+        if update_dates:
+            self._edit_data.edit_reservation_dates(self.check_in, self.check_out, total_stay.days, self.reservation_id)
             return
         
         # Reservation object
@@ -397,8 +413,24 @@ class ManagerEdit(ManagerSearch):
 
 
     def edit_client(self):
-
         self.search_all_clients()
         print('\nPlease choose id_client to edit that client')
         self.client_id = input("Client id input: ")
         self.create_client(self.update)
+
+    def edit_reservation(self, action):
+        self.search_all_reservations()
+        print("\nPlease choose id_reservation to edit that reservation")
+        self.reservation_id = input("Reservation id: ")
+
+        if not self.reservation_id.isnumeric():
+            print("\nOnly Digits!")
+            return
+
+        # If 2 update reservation titular client if 3 update reservation dates
+        if action == '2':
+            self.update_client = True
+            self.create_reservation(self.update_dates, self.update_client)
+        elif action == '3':
+            self.update_dates = True
+            self.create_reservation(self.update_dates)

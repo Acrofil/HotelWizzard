@@ -30,7 +30,6 @@ class Program:
             "\n 4. Show all arrivals today"
             "\n 5. Show all departures today"
             "\n 6. Edit or Delete Clients/Reservations"
-            "\n 7. Edit reservation"
             "\n 0. Exit program")      
 
     # Sub menus
@@ -67,7 +66,8 @@ class Program:
            elif menu_selector == '6':
                 print("\nPlease choose from the available options: "
                     "\n1. Edit Client"
-                    "\n2. Edit Reservation"
+                    "\n2. Change Reservation titular"
+                    "\n3. Change Reservation check in and check out dates"
                     "\n3. Delete Client"
                     "\n4. Delete Reservation"
                     "\n0. Return to main menu")
@@ -113,6 +113,8 @@ class Program:
         elif menu_selector == '6':
             if action == '1':
                 self.edit_client()
+            elif action == '2' or action == '3':
+                self.edit_reservation(action)
             elif action == '0':
                 self.execute()
 				
@@ -178,6 +180,9 @@ class Program:
     
     def edit_client(self):
         self._hotel_m_edit.edit_client()
+    
+    def edit_reservation(self, action):
+        self._hotel_m_edit.edit_reservation(action)
    
     
     
