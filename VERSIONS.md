@@ -1,5 +1,9 @@
 # Versions updates
 
+## Update v0.0.9 - 08.05.2023
+- Added the feature to edit the client data
+- Added the feature to edit reservation check in and check out dates or reservation titular names
+
 ## Update v0.0.8 - 04.05.2023
 - Added Show all Arrivals Today
 - Added Show all Departures Today

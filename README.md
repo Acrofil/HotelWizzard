@@ -51,7 +51,8 @@ Download all files. Run run.py. Follow the menu options.
 - [x] Show all Arrivals today
 - [x] Show all Departures today
 - [x] Edit Client
-- [] Edit reservation dates. 
+- [x] Edit reservation dates
+- [x] Edit reservation titular
 - [] Delete Client
 - [] Delete Reservation
 - [] On program start up, check for Reservations that have expired - It is check out day after 12:00. Add them to other table with old Reservations and delete from the actual Reservations table.
