@@ -5,6 +5,7 @@ from reservations import Reservation
 from database_insert import CreateData
 from database_fetch import ReadData
 from database_fetch import EditData
+from database_fetch import DeleteData
 import re
 import pandas as pd
 from tabulate import tabulate
@@ -14,6 +15,7 @@ class HotelManager:
         self._data = CreateData()
         self._search_data = ReadData()
         self._edit_data = EditData()
+        self._delete_data = DeleteData()
 
         self.today = date.today()
 
@@ -434,3 +436,27 @@ class ManagerEdit(ManagerSearch):
         elif action == '3':
             self.update_dates = True
             self.create_reservation(self.update_dates)
+
+class ManagerDelete(ManagerEdit):
+    def __init__(self):
+        super().__init__()
+        pass
+
+    def delete_client(self):
+        self.search_clients_by_name()
+
+        client_id = input("\nInput the id_client number to delete it: ")
+
+        if not client_id.isnumeric():
+            print("Not a digit!")
+            return
+        
+        confirm_delete = input("\nPlease type in 'DELETE': ")
+
+        if confirm_delete == 'DELETE':
+            self._delete_data.delete_client_data(client_id)
+        elif confirm_delete != "DELETE":
+            print("\nType DELETE to delete the client!")
+            return
+
+        

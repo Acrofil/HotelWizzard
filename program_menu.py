@@ -12,6 +12,7 @@ from datetime import datetime, date, time
 from hotel_manager import HotelManager
 from hotel_manager import ManagerSearch
 from hotel_manager import ManagerEdit
+from hotel_manager import ManagerDelete
 
 class Program:
     def __init__(self) -> None:
@@ -20,6 +21,7 @@ class Program:
         self._hotel_m = HotelManager()
         self._hotel_m_search = ManagerSearch()
         self._hotel_m_edit = ManagerEdit()
+        self._hotel_m_delete = ManagerDelete()
 
     # Main menu 
     def menu(self):      
@@ -68,8 +70,8 @@ class Program:
                     "\n1. Edit Client"
                     "\n2. Change Reservation titular"
                     "\n3. Change Reservation check in and check out dates"
-                    "\n3. Delete Client"
-                    "\n4. Delete Reservation"
+                    "\n4. Delete Client"
+                    "\n5. Delete Reservation"
                     "\n0. Return to main menu")
                 
                 self.execute_sub_menus(menu_selector)
@@ -115,6 +117,8 @@ class Program:
                 self.edit_client()
             elif action == '2' or action == '3':
                 self.edit_reservation(action)
+            elif action == '4':
+                self.delete_client()
             elif action == '0':
                 self.execute()
 				
@@ -183,6 +187,9 @@ class Program:
     
     def edit_reservation(self, action):
         self._hotel_m_edit.edit_reservation(action)
+    
+    def delete_client(self):
+        self._hotel_m_delete.delete_client()
    
     
     
