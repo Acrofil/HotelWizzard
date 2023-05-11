@@ -173,7 +173,16 @@ class DeleteData(EditData):
         self.cursor.execute(delete_client_q, delete_client_tuple)
         self.conn.commit()
         self.close_connection()
-        
+
+    def delete_reservation_data(self, id_reservation):
+        self.open_connection()
+
+        delete_reservation_q = "DELETE FROM reservations WHERE id_reservation = (?)"
+        delete_reservation_tuple = (id_reservation, )
+
+        self.cursor.execute(delete_reservation_q, delete_reservation_tuple)
+        self.conn.commit()
+        self.close_connection()        
 
         
         

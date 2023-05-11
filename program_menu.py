@@ -119,6 +119,8 @@ class Program:
                 self.edit_reservation(action)
             elif action == '4':
                 self.delete_client()
+            elif action == '5':
+                self.delete_reservation()
             elif action == '0':
                 self.execute()
 				
@@ -190,6 +192,9 @@ class Program:
     
     def delete_client(self):
         self._hotel_m_delete.delete_client()
+    
+    def delete_reservation(self):
+        self._hotel_m_delete.delete_reservation()
    
     
     
