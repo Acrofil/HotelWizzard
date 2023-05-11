@@ -458,5 +458,23 @@ class ManagerDelete(ManagerEdit):
         elif confirm_delete != "DELETE":
             print("\nType DELETE to delete the client!")
             return
+    
+    def delete_reservation(self):
+        self.search_reservations_by_titular()
+
+        reservation_id = input("'nInput the id_reservation number to delete it: ")
+
+        if not reservation_id.isnumeric():
+            print("Not a digit!")
+            return
+        
+        confirm_delete = input("\nPlease type in 'DELETE': ")
+
+        if confirm_delete == 'DELETE':
+            self._delete_data.delete_reservation_data(reservation_id)
+        elif confirm_delete != "DELETE":
+            print("\nType DELETE to delete the client!")
+            return
+        
 
         
