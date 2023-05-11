@@ -1,5 +1,9 @@
 # Versions updates
 
+## Update v0.0.10 - 11.05.2023
+- Added the feature to delete client from the database
+- Added the feature to delete reservation from the database
+
 ## Update v0.0.9 - 08.05.2023
 - Added the feature to edit the client data
 - Added the feature to edit reservation check in and check out dates or reservation titular names
